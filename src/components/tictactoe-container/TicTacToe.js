@@ -1,44 +1,79 @@
 import React, { useState } from "react";
 import "./TicTacToe.css";
+import Swal from 'sweetalert2'
+const Swal = require('sweetalert2')
 
 const TicTacToe = () => {
   // const [ startGame, setStartGame] = useState(false);
-  const [gameValue, setGameValue] = useState("");
+  const [board, setBoard] = useState([
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ]);
 
-  const handleClick = (index) => {
-    if (index !== -1) {
-      if (gameValue === "X") {
-        setGameValue("O");
-      } else {
-        setGameValue("X");
-      }
+  const [gameValue, setGameValue] = useState("X");
+
+  const handleClick = (parentIndex, childIndex) => {
+    const boardCopy = board.map((e) => e.map((v) => v));
+    boardCopy[parentIndex][childIndex] = gameValue;
+
+    setBoard(boardCopy);
+
+    if (gameValue === "X") {
+      setGameValue("O");
+    } else {
+      setGameValue("X");
     }
   };
 
-  // if(startGame){
+  function gameState(arr) {
+    if (
+      (arr[0][0] === "X" && arr[0][1] === "X" && arr[0][2] === "X") ||
+      (arr[1][0] === "X" && arr[1][1] === "X" && arr[1][2] === "X") ||
+      (arr[2][0] === "X" && arr[2][1] === "X" && arr[2][2] === "X") ||
+      (arr[0][0] === "X" && arr[1][0] === "X" && arr[2][0] === "X") ||
+      (arr[0][1] === "X" && arr[1][1] === "X" && arr[2][1] === "X") ||
+      (arr[0][2] === "X" && arr[1][2] === "X" && arr[2][2] === "X") ||
+      (arr[0][0] === "X" && arr[1][1] === "X" && arr[2][2] === "X") ||
+      (arr[0][2] === "X" && arr[1][1] === "X" && arr[2][0] === "X")
+    ) {
+      console.log("first player wins");
+    } else if (
+      (arr[0][0] === "O" && arr[0][1] === "O" && arr[0][2] === "O") ||
+      (arr[1][0] === "O" && arr[1][1] === "O" && arr[1][2] === "O") ||
+      (arr[2][0] === "O" && arr[2][1] === "O" && arr[2][2] === "O") ||
+      (arr[0][0] === "O" && arr[1][0] === "O" && arr[2][0] === "O") ||
+      (arr[0][1] === "O" && arr[1][1] === "O" && arr[2][1] === "O") ||
+      (arr[0][2] === "O" && arr[1][2] === "O" && arr[2][2] === "O") ||
+      (arr[0][0] === "O" && arr[1][1] === "O" && arr[2][2] === "O") ||
+      (arr[0][2] === "O" && arr[1][1] === "O" && arr[2][0] === "O")
+    ) {
+      console.log("second player wins");
+    }
+  }
 
-  // }
+  gameState(board);
 
   return (
     <React.Fragment>
       <section className="game-container">
         <section className="game-inner-container">
-          {Array(9)
-            .fill(0)
-            .map((box, index) => {
+          {board.map((box, parentIndex) => {
+            return box.map((e, childIndex) => {
               return (
                 <div
-                  key={index}
+                  key={`${childIndex}-box`}
                   className="grid-hole"
-                  onClick={() => handleClick(index)}
+                  onClick={() => handleClick(parentIndex, childIndex)}
                 >
-                  {gameValue}
+                  {e}
                 </div>
               );
-            })}
+            });
+          })}
         </section>
       </section>
-      {/* <button onClick={()=> setStartGame(true)}>restart</button> */}
+      {/* <button onClick={()=> setBoard('X')}>restart</button> */}
     </React.Fragment>
   );
 };
