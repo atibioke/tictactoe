@@ -1,21 +1,32 @@
 .game-container {
-  width: 35vw;
-  /* display: flex; */
-  margin: 0 auto;
+  width: 100vw;
+ display: flex;
+ justify-content: center;
+  
 }
 
+
 .game-inner-container {
-  padding: 15px 10px 10px 10px;
-  width: 30vw;
+  padding: 8px;
+  width: 28vw;
   background-color: #000000;
   height: 50vh;
   display: flex;
+  align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
+  
 }
 
 .grid-hole {
   background-color: #fff;
   width: 8vw;
   height: 28%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 70px;
 }
+
+
