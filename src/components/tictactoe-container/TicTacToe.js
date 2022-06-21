@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./TicTacToe.css";
 import { decideWinner } from "./Helper";
 
 const TicTacToe = () => {
@@ -30,35 +29,35 @@ const TicTacToe = () => {
 
   const handleRestart = () => {
     setGameState("GAME_STARTED");
-    setGameValue("X")
+    setGameValue("X");
     setBoard([
       ["", "", ""],
       ["", "", ""],
       ["", "", ""],
     ]);
-   
   };
 
   return (
     <React.Fragment>
       <section className="game-container">
         <section className="game-inner-container">
-          {board.map((box, parentIndex) => {
-            return box.map((e, childIndex) => {
+          {board.map((boardInitialElements, parentIndex) => {
+            return boardInitialElements.map((value, childIndex) => {
               return (
                 <div
                   key={`${childIndex}-box`}
                   className="grid-hole"
                   onClick={() => handleClick(parentIndex, childIndex)}
                 >
-                  {e}
+                  {value}
                 </div>
               );
             });
           })}
         </section>
       </section>
-      <button onClick={() => handleRestart()}>restart</button>
+     <section className="reStartBtn-container">  <button className="reStartBtn" onClick={() => handleRestart()}>restart</button></section>
+
     </React.Fragment>
   );
 };

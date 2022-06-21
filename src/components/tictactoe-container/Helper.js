@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 
 export function decideWinner(arr, setGameState) {
-  function getValue(param) {
+  function checkDraw(param) {
     let sum = 0;
     for (let i = 0; i < arr.length; i += 1) {
       for (let j = 0; j < arr[i].length; j += 1) {
@@ -35,7 +35,7 @@ export function decideWinner(arr, setGameState) {
   ) {
     setGameState("GAME_ENDED");
     Swal.fire("Second Player Wins!");
-  } else if (getValue(arr) === 9) {
+  } else if (checkDraw(arr) === 9) {
     setGameState("GAME_ENDED");
     Swal.fire("Draw!");
   }
