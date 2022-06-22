@@ -35,10 +35,6 @@ const SignIn = () => {
       setValidation(true);
     } else {
       if (username === validData.username && password === validData.password) {
-        console.log(username, "username");
-        console.log(password, "password");
-        console.log(validData.username, "validData.username");
-        console.log(validData.password, "validData.password");
         navigate("/tictactoe");
       }
     }
