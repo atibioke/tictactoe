@@ -78,6 +78,11 @@ body {
   text-align: center;
 }
 
+.modal-box{
+  display: flex;
+  justify-content:center;
+}
+
 .reStartBtn:hover {
   background: var(--clr-primary-1);
   color: var(--clr-primary-2);
