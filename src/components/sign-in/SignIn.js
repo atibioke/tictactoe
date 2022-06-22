@@ -5,6 +5,7 @@ const SignIn = () => {
   const navigate = useNavigate()
   const [inValid, setInValid] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [validation, setValidation] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,6 +20,8 @@ const SignIn = () => {
       setIsError(true);
     }
 
+
+
     if (username && password) {
       setUsername(username)
       setPassword(password);
@@ -30,6 +33,8 @@ const SignIn = () => {
 
      
     }
+
+
     const validData = JSON.parse(localStorage.getItem('myData'))
     if(username === validData.username && password === validData.password){
       console.log(username, 'username');
@@ -38,6 +43,10 @@ const SignIn = () => {
       console.log(validData.password, 'validData.password');
      navigate('/tictactoe')
     }
+
+    if(validData.password === '' || validData.username === ''){
+      setValidation(true)
+    }
     
   };
 
@@ -45,6 +54,7 @@ const SignIn = () => {
     <div className="container">
       <div className="left-container">
         <form className="form">
+          {validation && <span className="span-modal">Incorrect username or password</span>}
           <h1 className="hello">Hello</h1>
           <p className="sigin-paragraph">Sign in into your account.</p>
           <div className="input-wrapper">
