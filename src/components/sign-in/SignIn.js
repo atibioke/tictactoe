@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [inValid, setInValid] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [validation, setValidation] = useState(true);
+  const [validation, setValidation] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,72 +20,64 @@ const SignIn = () => {
       setIsError(true);
     }
 
-
-
     if (username && password) {
-      setUsername(username)
+      setUsername(username);
       setPassword(password);
-     
+
       setInValid(false);
       setIsError(false);
       setPassword("");
       setUsername("");
-
-     
     }
 
-
-    const validData = JSON.parse(localStorage.getItem('myData'))
-    if(!validData){
-      setValidation(true)
-    }else{
-      if(username === validData.username && password === validData.password){
-        console.log(username, 'username');
-        console.log(password, 'password');
-        console.log(validData.username, 'validData.username');
-        console.log(validData.password, 'validData.password');
-       navigate('/tictactoe')
+    const validData = JSON.parse(localStorage.getItem("myData"));
+    if (!validData) {
+      setValidation(true);
+    } else {
+      if (username === validData.username && password === validData.password) {
+        console.log(username, "username");
+        console.log(password, "password");
+        console.log(validData.username, "validData.username");
+        console.log(validData.password, "validData.password");
+        navigate("/tictactoe");
       }
     }
- 
-
-   
-    
   };
 
   return (
     <div className="container">
       <div className="left-container">
         <form className="form">
-         
           <h1 className="hello">Hello</h1>
           <p className="sigin-paragraph">Sign in into your account.</p>
-         <div className="modal-box">
-         {validation && <span className="span-modal">Incorrect username or password</span>}
-         </div>
-          <div className="input-wrapper">
-           <div className="modal">
-           <input
-              type="text"
-              placeholder="Username"
-              className="email-input"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            {inValid && <span className="span-modal">input username</span>}
-           </div>
+          <div className="modal-box">
+            {validation && (
+              <span className="span-modal">Incorrect username or password</span>
+            )}
           </div>
           <div className="input-wrapper">
-           <div className="modal">
-           <input
-              type="password"
-              placeholder="Password"
-              className="password-input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            {isError && <span className="span-modal">input password</span>}
-           </div>
+            <div className="modal">
+              <input
+                type="text"
+                placeholder="Username"
+                className="email-input"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              {inValid && <span className="span-modal">input username</span>}
+            </div>
+          </div>
+          <div className="input-wrapper">
+            <div className="modal">
+              <input
+                type="password"
+                placeholder="Password"
+                className="password-input"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {isError && <span className="span-modal">input password</span>}
+            </div>
           </div>
           <div className="remember-me-container">
             <a href="/signin" className="remember-me">
