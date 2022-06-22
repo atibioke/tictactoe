@@ -11,8 +11,6 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const validData = JSON.parse(localStorage.getItem("myData"));
-
   const handleSubmit = (e) => {
     const navigate = useNavigate();
     e.preventDefault();
