@@ -5,7 +5,7 @@ import "./SignUp.css";
 const SignUp = () => {
   const [inValid, setInValid] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  
   const [validEmail, setValidEmail] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -42,7 +42,7 @@ const SignUp = () => {
       localStorage.setItem("myData", myData);
       setInValid(false);
       setIsError(false);
-      setIsSuccess(false);
+
       setValidEmail(false);
       setPassword("");
       setUsername("");
