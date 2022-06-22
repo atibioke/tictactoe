@@ -72,10 +72,10 @@ const SignIn = () => {
            </div>
           </div>
           <div className="remember-me-container">
-            <a href="#" className="remember-me">
+            <a href="/signin" className="remember-me">
               Remember me
             </a>
-            <a href="#" className="forgot-password">
+            <a href="/signin" className="forgot-password">
               Forgot password
             </a>
           </div>
