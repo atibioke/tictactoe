@@ -1,8 +1,46 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+  const navigate = useNavigate()
+  const [inValid, setInValid] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!username) {
+      setInValid(true);
+    }
+
+    if (!password) {
+      setIsError(true);
+    }
+
+    if (username && password) {
+      setUsername(username)
+      setPassword(password);
+     
+      setInValid(false);
+      setIsError(false);
+      setPassword("");
+      setUsername("");
+
+     
+    }
+    const validData = JSON.parse(localStorage.getItem('myData'))
+    if(username === validData.username && password === validData.password){
+      console.log(username, 'username');
+      console.log(password, 'password');
+      console.log(validData.username, 'validData.username');
+      console.log(validData.password, 'validData.password');
+     navigate('/tictactoe')
+    }
+    
+  };
+
   return (
     <div className="container">
       <div className="left-container">
@@ -10,20 +48,42 @@ const SignIn = () => {
           <h1 className="hello">Hello</h1>
           <p className="sigin-paragraph">Sign in into your account.</p>
           <div className="input-wrapper">
-            <input type="text" placeholder="Username" className="email-input" />
+           <div className="modal">
+           <input
+              type="text"
+              placeholder="Username"
+              className="email-input"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            {inValid && <span className="span-modal">input username</span>}
+           </div>
           </div>
           <div className="input-wrapper">
-            <input
+           <div className="modal">
+           <input
               type="password"
               placeholder="Password"
               className="password-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
+            {isError && <span className="span-modal">input password</span>}
+           </div>
           </div>
           <div className="remember-me-container">
-            <a href="#" className="remember-me">Remember me</a>
-            <a href="#" className="forgot-password">Forgot password</a>
+            <a href="#" className="remember-me">
+              Remember me
+            </a>
+            <a href="#" className="forgot-password">
+              Forgot password
+            </a>
           </div>
-          <div className="button-box"><button className="btn">Sign in</button></div>
+          <div className="button-box">
+            <button className="btn" onClick={(e) => handleSubmit(e)}>
+              Sign in
+            </button>
+          </div>
 
           <div className="create-account">
             <span>
@@ -50,6 +110,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-
-
-

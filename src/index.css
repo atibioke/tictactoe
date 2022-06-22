@@ -107,18 +107,16 @@ body {
 
 .right-container {
   width: 30%;
-  background-color: yellow;
   background-image: linear-gradient(180deg, rgb(0, 140, 255), rgb(144, 0, 255));
   text-align: center;
   border-radius: 0px 10px 10px 0px;
-  padding-top: 60px;
-  padding-bottom: 60px;
   color: #fff;
+  padding: 60px 20px 60px 20px;
 }
 
 .right-container > p {
-  margin-top: 20px;
   line-height: 30px;
+  margin-top: 40px;
 }
 
 .form {
@@ -146,12 +144,25 @@ body {
   text-align: center;
   width: 100%;
   padding-top: 10px;
+  margin-top: 10px;
+}
+
+.modal{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
 }
 
 input {
   width: 50%;
   height: 40px;
   border-radius: 5px;
+  margin: 0 auto;
+}
+
+.span-modal{
+  color: red;
 }
 
 .sigin-paragraph {
@@ -186,11 +197,27 @@ input {
 .create-account {
   display: flex;
   justify-content: center;
+  margin-top: 15px;
 }
 
 .create-account-link {
   margin-right: 10px;
   text-decoration: none;
 }
+
+/* ENDING */
+
+/* SIGNUP STYLING BEGINS */
+
+.remember-me-container {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.remember-me-container > p {
+  margin-left: 90px;
+}
+
 
 /* ENDING */

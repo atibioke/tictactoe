@@ -1,33 +1,107 @@
-import React from "react";
+import React, { useState } from "react";
 // import { Link } from "react-router-dom";
 import "./SignUp.css";
 
 const SignUp = () => {
+  const [inValid, setInValid] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!username) {
+      setInValid(true);
+    }
+
+    if (!password) {
+      setIsError(true);
+    }
+
+    if (
+      
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
+    ) {
+      setValidEmail(true);
+    }
+
+    if (
+      username &&
+      password &&
+      /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
+    ) {
+      setUsername(username);
+      setPassword(password);
+      setEmail(email);
+
+      const myData = JSON.stringify({ username, password, email });
+      localStorage.setItem("myData", myData);
+      setInValid(false);
+      setIsError(false);
+      setIsSuccess(false);
+      setValidEmail(false);
+      setPassword("");
+      setUsername("");
+      setEmail("");
+    }
+
+    
+  };
+
   return (
     <div className="container">
       <div className="left-container">
         <form className="form">
           <h1 className="hello">Hello, friend</h1>
-          <p className="sigin-paragraph">Sign in into your account.</p>
+          <p className="sigin-paragraph">Create an account.</p>
           <div className="input-wrapper">
-            <input
-              type="text"
-              placeholder="Username"
-              className="username-input"
-            />
+            <div className="modal">
+              <input
+                type="text"
+                placeholder="Username"
+                className="username-input"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              {inValid && (
+                <span className="span-modal">username is required!</span>
+              )}
+            </div>
           </div>
           <div className="input-wrapper">
-            <input type="email" placeholder="Email" className="email-input" />
+            <div className="modal">
+              <input
+                type="email"
+                placeholder="Email"
+                className="email-input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              {validEmail && (
+                <span className="span-modal"> valid email is required!</span>
+              )}
+            </div>
           </div>
           <div className="input-wrapper">
-            <input
-              type="password"
-              placeholder="Password"
-              className="password-input"
-            />
+            <div className="modal">
+              <input
+                type="password"
+                placeholder="Password"
+                className="password-input"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {isError && (
+                <span className="span-modal">password is required!</span>
+              )}
+            </div>
           </div>
           <div className="remember-me-container">
-            <p>I read and agree to</p>
             {/* <Link to="#" className="remember-me">
                Terms & Conditions
             </Link> */}
@@ -36,7 +110,9 @@ const SignUp = () => {
             </a> */}
           </div>
           <div className="button-box">
-            <button className="btn">Sign Up</button>
+            <button className="btn" onClick={(e) => handleSubmit(e)}>
+              Submit
+            </button>
           </div>
 
           {/* <div className="create-account">
