@@ -57,9 +57,10 @@ const SignIn = () => {
     <div className="container">
       <div className="left-container">
         <form className="form">
-          {validation && <span className="span-modal">Incorrect username or password</span>}
+         
           <h1 className="hello">Hello</h1>
           <p className="sigin-paragraph">Sign in into your account.</p>
+          {validation && <span className="span-modal">Incorrect username or password</span>}
           <div className="input-wrapper">
            <div className="modal">
            <input
