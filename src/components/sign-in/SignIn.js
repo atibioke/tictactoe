@@ -31,7 +31,7 @@ const SignIn = () => {
     }
 
     const validData = JSON.parse(localStorage.getItem("myData"));
-    if (username !== validData.username || password !== validData.password) {
+    if (!validData || username !== validData.username || password !== validData.password) {
       setValidation(true);
     } else {
       if (username === validData.username && password === validData.password) {
