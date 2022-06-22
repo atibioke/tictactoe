@@ -5,14 +5,16 @@ import "./SignUp.css";
 const SignUp = () => {
   const [inValid, setInValid] = useState(false);
   const [isError, setIsError] = useState(false);
-  
+
   const [validEmail, setValidEmail] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
+  const validData = JSON.parse(localStorage.getItem("myData"));
+
   const handleSubmit = (e) => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     e.preventDefault();
 
     if (!username) {
@@ -23,19 +25,15 @@ const SignUp = () => {
       setIsError(true);
     }
 
-    if (
-      
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
-    ) {
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
       setValidEmail(true);
     }
 
     if (
       username &&
       password &&
-      /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) && !validData
-    
-      
+      /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email) &&
+      !validData
     ) {
       setUsername(username);
       setPassword(password);
@@ -50,10 +48,8 @@ const SignUp = () => {
       setPassword("");
       setUsername("");
       setEmail("");
-      navigate("/tictactoe")
+      navigate("/tictactoe");
     }
-
-    
   };
 
   return (
