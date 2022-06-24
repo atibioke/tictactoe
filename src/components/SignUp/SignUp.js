@@ -28,7 +28,6 @@ const SignUp = () => {
       setValidEmail(true);
     }
 
-    
     if (
       username &&
       password &&
