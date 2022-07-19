@@ -12,41 +12,61 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e) => {
-    
+  // new setup
+  //   const [profile, setProfile] = useState([{username:'', password:'', email:''}])
+
+  // console.log(profile, 'profile');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      if (!username) {
+        setInValid(true);
+      }
 
-    if (!username) {
-      setInValid(true);
-    }
+      if (!password) {
+        setIsError(true);
+      }
 
-    if (!password) {
-      setIsError(true);
-    }
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+        setValidEmail(true);
+      }
 
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-      setValidEmail(true);
-    }
+      if (
+        username &&
+        password &&
+        /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
+      ) {
+        setUsername(username);
+        setPassword(password);
+        setEmail(email);
+// posting my details
+        const myData = async () => {
+          try {
+            const body = { username, email, password}
+            const response = await fetch("http://localhost:5001/tictactoe", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(body)
+            });
+          } catch (error) {
+            console.error(error.message);
+          }
+        };
+// calling myData
+        myData()
+//
+        setInValid(false);
+        setIsError(false);
 
-    if (
-      username &&
-      password &&
-      /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
-    ) {
-      setUsername(username);
-      setPassword(password);
-      setEmail(email);
-
-      const myData = JSON.stringify({ username, password, email });
-      localStorage.setItem("myData", myData);
-      setInValid(false);
-      setIsError(false);
-
-      setValidEmail(false);
-      setPassword("");
-      setUsername("");
-      setEmail("");
-      navigate("/tictactoe");
+        setValidEmail(false);
+        setPassword("");
+        setUsername("");
+        setEmail("");
+        navigate("/tictactoe");
+      }
+    } catch (error) {
+      console.error(error.message);
     }
   };
 

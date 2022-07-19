@@ -23,20 +23,32 @@ const SignIn = () => {
     if (username && password) {
       setUsername(username);
       setPassword(password);
-
       setInValid(false);
       setIsError(false);
-      setPassword("");
-      setUsername("");
+      validDetail();
     }
+  };
 
-    const validData = JSON.parse(localStorage.getItem("myData"));
-    if (!validData || username !== validData.username || password !== validData.password) {
-      setValidation(true);
-    } else {
-      if (username === validData.username && password === validData.password) {
+  const validDetail = async () => {
+    try {
+      const response = await fetch("http://localhost:5001/tictactoe");
+      const validData = await response.json();
+      console.log(validData);
+      const found = validData.find(
+        (element) =>
+          element.username === username && element.password === password
+      );
+
+      if (!found) {
+        setValidation(true);
+      } else {
         navigate("/tictactoe");
+
+        setPassword("");
+        setUsername("");
       }
+    } catch (error) {
+      console.error(error.message);
     }
   };
 
@@ -100,7 +112,7 @@ const SignIn = () => {
         </form>
       </div>
       <div className="right-container">
-        <h1>Welcome Back!</h1>
+        <h1>Welcome!</h1>
         <p>
           Tic-tac-toe, noughts and crosses, or Xs and Os is a paper-and-pencil
           game for two players who take turns marking the spaces in a
